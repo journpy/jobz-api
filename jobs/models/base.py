@@ -55,7 +55,7 @@ class BaseJob(models.Model):
 
     class Meta:
         abstract = True
-        ordering = ['-posted_at']
+        ordering = ['-last_updated']
 
     def __str__(self):
         """String representation of the Model object."""

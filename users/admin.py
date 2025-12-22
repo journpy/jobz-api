@@ -6,7 +6,10 @@ from .models import CustomUser
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
     """Custom user admin."""
-    list_display = ("id", "email", "is_staff", "is_active",)
+    list_display = (
+        "id", "email", "is_staff", "is_active", "is_superuser", 
+        "email_verified", "date_joined"
+        )
     list_filter = ("email", "is_staff", "is_active",)
     fieldsets = (
         (None, {"fields": ("email", "password")}),
