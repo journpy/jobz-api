@@ -20,7 +20,7 @@ class Command(BaseCommand):
             try:
                 job, created = Job.objects.update_or_create(**job)
                 self.stdout.write(self.style.SUCCESS(f"✅ Successfully saved job to the database"))
-                print(f"New job? {created}")
+                print(f"New job? {created}")    # tell whether this job was newly created or updated
                 counter += 1
             except Exception as exc:
                 self.stdout.write(self.style.ERROR(f"❌ Could not save job data to the database: {exc}"))
