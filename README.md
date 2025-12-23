@@ -45,9 +45,8 @@ python manage.py runserver
 ```
 /swagger-ui/
 ```
-9. Homepage for easy access
+9. Homepage for easy access http://127.0.0.1:8000/
 
-http://127.0.0.1:8000/api/auth/login/
 
 
 To contact me, [find my email here](https://mailhide.io/en/e/sXPUdBJS) or 

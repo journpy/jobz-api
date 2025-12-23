@@ -81,6 +81,7 @@ class RegisterSerializer(serializers.Serializer):
     
 
 class LoginSerializer(serializers.Serializer):
+    """Override Login Serializer to not require username"""
     #username = serializers.CharField(required=False, allow_blank=True)
     email = serializers.EmailField(required=False, allow_blank=True)
     password = serializers.CharField(style={'input_type': 'password'})
