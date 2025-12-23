@@ -41,12 +41,17 @@ python manage.py loadjobs
 python manage.py runserver
 ```
 
-8. Endpoints on Swagger UI
+8. Find Endpoints on Swagger UI
 ```
 /swagger-ui/
 ```
+9. Homepage for easy access
 
-To contact the author, [find email here](https://mailhide.io/en/e/sXPUdBJS).
+http://127.0.0.1:8000/api/auth/login/
+
+
+To contact me, [find my email here](https://mailhide.io/en/e/sXPUdBJS) or 
+visit my [website](https://lwu.pythonanywhere.com/).
 
 
 
