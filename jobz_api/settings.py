@@ -164,11 +164,12 @@ REST_FRAMEWORK = {
 REST_AUTH = {
     'USE_JWT': True,
     'JWT_AUTH_COOKIE': 'jwt-auth',
-    'JWT_AUTH_COOKIE': 'acc',
-    'JWT_AUTH_REFRESH_COOKIE': 'ref',
+    'JWT_AUTH_COOKIE': 'access',
+    'JWT_AUTH_REFRESH_COOKIE': 'refresh',
     'JWT_AUTH_HTTPONLY': False,
     'JWT_AUTH_RETURN_EXPIRATION': True,
     'REGISTER_SERIALIZER': 'api.users.serializers.RegisterSerializer',
+    'LOGIN_SERIALIZER': 'api.users.serializers.LoginSerializer',
 }
 
 SPECTACULAR_SETTINGS = {

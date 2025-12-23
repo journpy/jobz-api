@@ -6,14 +6,14 @@ import json
 import time
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-from typing import Dict
+from typing import Dict, Any, List, Union
 
 
 logging.basicConfig(level=logging.INFO)
 load_dotenv()
 
 # Handle ModuleNotFoundError by adding the parent package (services) to path
-SCRAPER_PATH = os.path.join(os.getcwd(), 'services')
+SCRAPER_PATH: str = os.path.join(os.getcwd(), 'services')
 sys.path.append(SCRAPER_PATH)
 # print(sys.path)
 try:
@@ -26,19 +26,19 @@ logging.info("✅ Successfully imported Base Scraper")
 
 class RemotiveScraper(base.BaseScraper):
     """Scraper class for Remotive API."""
-    def __init__(self, api_url, name="REMOTIVE"):
+    def __init__(self, api_url: str, name: str="REMOTIVE"):
         """Class constructor"""
         self.name = name
         super().__init__(api_url, name)
 
 
-    def scrape_jobs(self) -> Dict:
+    def scrape_jobs(self) -> Dict[str, Any]:
         """Scrape raw Remotive jobs"""
         self.api_url = os.getenv("REMOTIVE_API_URL", "")
         logging.info(f"✅ Successfully accessed Remotive's API URL {self.api_url}")
         
         try:
-            data = requests.get(self.api_url)
+            data: str = requests.get(self.api_url)
             logging.info(f"✅ Successfully scraped {self.name} API")
         except Exception as exc:
             logging.error(f"❌ An error occured: {exc}") 
@@ -47,7 +47,7 @@ class RemotiveScraper(base.BaseScraper):
                 self.retries += 1
                 time.sleep(1)
                 
-        deserialized_data = data.json()
+        deserialized_data: Dict = data.json()
         if deserialized_data:
             logging.info(f'ℹ️ Data type of raw jobs data: {type(deserialized_data)}')
             return deserialized_data.get("jobs", {})
@@ -56,7 +56,7 @@ class RemotiveScraper(base.BaseScraper):
         
     
     
-    def clean_data(self):
+    def clean_data(self) -> Any:
         """Clean raw data."""
         # Pass .content instead of .text to avoid problems with character 
         # encoding. The .content attribute holds raw bytes, which Python’s 
@@ -64,7 +64,7 @@ class RemotiveScraper(base.BaseScraper):
         # .text attribute of the returned data.
         try:
             ret_data = self.scrape_jobs()
-            serialized_data = json.dumps(ret_data, indent=4)
+            serialized_data: str = json.dumps(ret_data, indent=4)
             logging.info(f'ℹ️ Scraped job data has been serialized and has data type: {type(serialized_data)}')
             soup = BeautifulSoup(serialized_data, "html.parser")
             #logging.info(f"ℹ️ There are {len(soup)} jobs")
@@ -74,7 +74,7 @@ class RemotiveScraper(base.BaseScraper):
             logging.error(f"An error occured: {exc}")
             return []
         
-    def normalise_data(self):
+    def normalise_data(self) -> List[Any]:
         """Normalize raw job data into a consistent format"""
         remotive_scraper = RemotiveScraper('')
         payloads = []

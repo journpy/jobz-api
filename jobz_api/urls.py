@@ -24,15 +24,15 @@ urlpatterns = [
     # allauth urls
     path('users/', include('allauth.urls')),
     # expose dj-rest-auth endpoints
-    path('rest-auth/', include('dj_rest_auth.urls')),
+    path('api/auth/', include('dj_rest_auth.urls')),
     path(
-        'rest-auth/registration/account-confirm-email/<str:key>/', 
+        'api/auth/registration/account-confirm-email/<str:key>/', 
         ConfirmEmailView.as_view(), 
         name='account-confirm-email'
         ), # Needs to be defined before the registration path
-    path('rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('api/auth/registration/', include('dj_rest_auth.registration.urls')),
     path(
-        'api/v1/dj-rest-auth/account-confirm-email/',
+        'api/auth/account-confirm-email/',
         VerifyEmailView.as_view(),
         name='account_email_verification_sent'
     ),
