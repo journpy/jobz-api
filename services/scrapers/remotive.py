@@ -36,17 +36,17 @@ class RemotiveScraper(base.BaseScraper):
         """Scrape raw Remotive jobs"""
         self.api_url = os.getenv("REMOTIVE_API_URL", "")
         logging.info(f"✅ Successfully accessed Remotive's API URL {self.api_url}")
-        
-        try:
-            data: str = requests.get(self.api_url)
-            logging.info(f"✅ Successfully scraped {self.name} API")
-        except Exception as exc:
-            logging.error(f"❌ An error occured: {exc}") 
-            while self.retries <= self.max_retries:
+        while self.retries <= self.max_retries:
+            try:
+                data: str = requests.get(self.api_url)
+            except Exception as exc:
+                logging.error(f"❌ An error occured: {exc}") 
                 logging.error(f"⚠️ Retrying {self.retries}/{self.max_retries}")
                 self.retries += 1
-                time.sleep(1)
-                
+                time.sleep(60)
+            else:
+                logging.info(f"✅ Successfully scraped {self.name} API")
+                break   # break out of loop if scrape is successful
         deserialized_data: Dict = data.json()
         if deserialized_data:
             logging.info(f'ℹ️ Data type of raw jobs data: {type(deserialized_data)}')

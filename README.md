@@ -14,43 +14,45 @@ git clone https://github.com/journpy/jobz-api.git
 pip install -r requirements.txt
 ```
 
-3. Run migrations
+3. Get and set environment variables in a .env file. Look at `.env.example` for a sample of this
+
+4. Run migrations
 ```
 python manage.py migrate
 ```
 
-4. Create a superuser account
+5. Create a superuser account
 ```
 python manage.py createsuperuser
 ```
 
-5. Optionally Sign up for a user account. 
+6. Optionally Sign up for a user account. 
 ```
 /api/auth/registration/
 ```
 *Email authentication is used with JWT.*
 
-6. Login to use the app
+7. Login to use the app
 ```
 /api/auth/login/
 ```
 *This should spit out access and refresh tokens.*
 
-7. Load jobs to database
+8. Load jobs to database
 ```
 python manage.py loadjobs
 ```
 
-8. Spin up the development server
+9. Spin up the development server
 ```
 python manage.py runserver
 ```
 
-9. Find Endpoints on Swagger UI
+10. Find Endpoints on Swagger UI
 ```
 /swagger-ui/
 ```
-10. Homepage for easy access http://127.0.0.1:8000/
+11. Homepage for easy access http://127.0.0.1:8000/
 
 
 ### Contact the Author
